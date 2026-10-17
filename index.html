@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>領域展開 // RYŌIKI TENKAI</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23dc2626'/%3E%3Ctext x='16' y='23' font-size='20' font-weight='900' text-anchor='middle' fill='white' font-family='serif'%3E%E5%91%AA%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;600;800&family=Noto+Serif+JP:wght@400;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="is-veiled">
+    <!-- 帳 Veil Loader: lowers while the 36 keyframe plates load, lifts on entry -->
+    <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Loading domain">
+      <div class="veil-inner">
+        <div class="veil-seal">
+          <svg class="veil-ring" viewBox="0 0 200 200" aria-hidden="true">
+            <circle class="veil-ring-track" cx="100" cy="100" r="92" />
+            <g id="veil-ticks"></g>
+          </svg>
+          <span class="veil-kanji">帳</span>
+        </div>
+        <p class="veil-chant" id="veil-chant">闇より出でて闇より黒く　その穢れを禊ぎ祓え</p>
+        <div class="veil-status" aria-live="polite">
+          <span id="veil-count">00</span> / <span id="veil-total">36</span> PLATES CONSECRATED
+        </div>
+        <div class="veil-actions">
+          <button class="veil-enter" id="veil-enter" disabled>領域展開 <span>ENTER WITH SOUND</span></button>
+          <button class="veil-muted" id="veil-muted" disabled>enter silently</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Film grain & custom cursor reticle -->
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+    <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+    <!-- Fixed 60fps Multi-Frame 2.5D Depth-Tunnel Canvas -->
+    <canvas id="world3d-canvas" class="world3d-canvas" aria-hidden="true"></canvas>
+    <canvas id="domain-canvas"></canvas>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Camera mode switch (Key: V cycles) -->
+    <nav class="mode-switch" aria-label="Camera mode (Key: V)">
+      <button class="mode-btn" data-view-mode="world-map" title="2D world map"><span class="mode-ja">地図</span>MAP</button>
+      <button class="mode-btn" data-view-mode="world-3d" title="three.js Domain Realms"><span class="mode-ja">界</span>3D</button>
+      <button class="mode-btn" data-view-mode="portal-tunnel" title="2.5D portal tunnel"><span class="mode-ja">門</span>TUNNEL</button>
+    </nav>
+
+    <!-- Minimal Top Navigation (No Tabs Needed) -->
+    <header class="top-nav">
+      <div class="logo-group">
+        <div class="talisman-icon">呪</div>
+        <span class="logo-ja">領域展開</span>
+      </div>
+
+      <!-- Real-time Journey Chapter Indicator -->
+      <div class="nav-chapter-indicator" id="nav-chapter-indicator">
+        <span class="chapter-num" id="nav-chapter-num">01</span>
+        <span class="chapter-sep">/</span>
+        <span class="chapter-name" id="nav-chapter-name">無量空処 // INFINITE VOID</span>
+      </div>
+
+      <div class="header-actions">
+        <button id="btn-audio" class="action-btn" title="Toggle Soundscape (Key: M)">
+          <canvas id="audio-wave" width="32" height="16"></canvas>
+          <span class="audio-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ONE SINGLE CONTINUOUS SCROLL JOURNEY -->
+    <main class="story-scroll" id="story-scroll">
+
+      <!-- ================= CHAPTER 01: INFINITE VOID — SATORU GOJO ================= -->
+      <section class="story-phase hero-phase" data-chapter="0" data-phase="0">
+        <div class="phase-overlay hero-overlay">
+          <div class="chapter-badge">CHAPTER 01 // 特級領域</div>
+          <h1 class="hero-kanji">領域展開</h1>
+          <h2 class="hero-title">無量空処</h2>
+          <div class="hero-sub">INFINITE VOID — SATORU GOJO</div>
+          <div class="scroll-prompt">
+            <div class="mouse-icon"><div class="wheel-dot"></div></div>
+            <span class="prompt-text">SCROLL TO EXPAND DOMAIN</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="0" data-phase="1">
+        <div class="phase-overlay float-left">
+          <span class="phase-label">01 // 蒼赫収束 CONVERGENCE</span>
+          <h3 class="phase-title">Limitless Convergence</h3>
+          <p class="phase-quote">「位相、黄昏、智慧の瞳...」</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="0" data-phase="2">
+        <div class="phase-overlay float-right">
+          <span class="phase-label">02 // 帝釈天印 MUDRA</span>
+          <h3 class="phase-title">Taishakuten Mudra</h3>
+          <p class="phase-accent">SEAL OF INDRA • ABSOLUTE DOMINION</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="0" data-phase="3">
+        <div class="phase-overlay float-center">
+          <span class="phase-label">03 // 結界破断 FRACTURE</span>
+          <h3 class="phase-title">Euclidean Shatter</h3>
+          <p class="phase-quote">「領域展開」 (RYŌIKI TENKAI)</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="0" data-phase="4">
+        <div class="phase-overlay float-left">
+          <span class="phase-label">04 // 生得領域 MANIFESTATION</span>
+          <h3 class="phase-title">Boundless Cosmos</h3>
+          <p class="phase-desc">Revolving accretion rings, nebulae, and the boundless void of infinity.</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="0" data-phase="5">
+        <div class="phase-overlay float-bottom">
+          <span class="phase-label">05 // 必中必殺 SURE-HIT</span>
+          <h3 class="phase-title">Omniscient Singularity</h3>
+          <p class="phase-quote">「生きているというプロセスを無限回強制される」</p>
+        </div>
+      </section>
+
+      <!-- ================= CHAPTER 02: MALEVOLENT SHRINE — RYOMEN SUKUNA ================= -->
+      <section class="story-phase chapter-gate" data-chapter="1" data-phase="0">
+        <div class="phase-overlay hero-overlay">
+          <div class="chapter-badge red-badge">CHAPTER 02 // 呪いの王</div>
+          <h1 class="hero-kanji red-glow">領域展開</h1>
+          <h2 class="hero-title red-text">伏魔御廚子</h2>
+          <div class="hero-sub">MALEVOLENT SHRINE — RYOMEN SUKUNA</div>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="1" data-phase="1">
+        <div class="phase-overlay float-left">
+          <span class="phase-label red-label">01 // 黒焔湧出 MALICE</span>
+          <h3 class="phase-title">Crimson Malice Surge</h3>
+          <p class="phase-quote">「餓鬼共、分を弁えろ...」</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="1" data-phase="2">
+        <div class="phase-overlay float-right">
+          <span class="phase-label red-label">02 // 閻魔天印 MUDRA</span>
+          <h3 class="phase-title">Enma-ten Mudra</h3>
+          <p class="phase-accent red-accent">YAMA'S SEAL • JUDGE OF HELL</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="1" data-phase="3">
+        <div class="phase-overlay float-center">
+          <span class="phase-label red-label">03 // 空間切断 DISMANTLE</span>
+          <h3 class="phase-title">Reality Sliced</h3>
+          <p class="phase-quote">「伏魔御廚子」 (FUKUMA MIZUSHI)</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="1" data-phase="4">
+        <div class="phase-overlay float-left">
+          <span class="phase-label red-label">04 // 骸の御廚子 SANCTUM</span>
+          <h3 class="phase-title">Pagoda of Horns</h3>
+          <p class="phase-desc">Demonic temple resting upon a mountain of bones in a sea of blood.</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="1" data-phase="5">
+        <div class="phase-overlay float-bottom">
+          <span class="phase-label red-label">05 // 必中必殺 SURE-HIT</span>
+          <h3 class="phase-title">200m Annihilation Storm</h3>
+          <p class="phase-quote">「塵芥の如く消え去れ」</p>
+        </div>
+      </section>
+
+      <!-- ================= CHAPTER 03: CHIMERA SHADOW GARDEN — MEGUMI FUSHIGURO ================= -->
+      <section class="story-phase chapter-gate" data-chapter="2" data-phase="0">
+        <div class="phase-overlay hero-overlay">
+          <div class="chapter-badge cyan-badge">CHAPTER 03 // 十種影法術</div>
+          <h1 class="hero-kanji cyan-glow">領域展開</h1>
+          <h2 class="hero-title cyan-text">嵌合暗翳庭</h2>
+          <div class="hero-sub">CHIMERA SHADOW GARDEN — MEGUMI FUSHIGURO</div>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="2" data-phase="1">
+        <div class="phase-overlay float-left">
+          <span class="phase-label cyan-label">01 // 黒墨氾濫 INK SURGE</span>
+          <h3 class="phase-title">Liquid Ink Flood</h3>
+          <p class="phase-quote">「もっと自由に、イメージを広げろ...」</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="2" data-phase="2">
+        <div class="phase-overlay float-right">
+          <span class="phase-label cyan-label">02 // 十種影法術印 MUDRA</span>
+          <h3 class="phase-title">Puppet Mudra Lock</h3>
+          <p class="phase-accent cyan-accent">AVIAN WINGS & LUPINE JAWS</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="2" data-phase="3">
+        <div class="phase-overlay float-center">
+          <span class="phase-label cyan-label">03 // 領域侵食 INUNDATION</span>
+          <h3 class="phase-title">Abyssal Inundation</h3>
+          <p class="phase-quote">「嵌合暗翳庭！」 (KANGŌ AN'EITEI!)</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="2" data-phase="4">
+        <div class="phase-overlay float-left">
+          <span class="phase-label cyan-label">04 // 鵺と玉犬 SHIKIGAMI</span>
+          <h3 class="phase-title">Cavern of Shikigami</h3>
+          <p class="phase-desc">Winged Nue beasts and divine hounds stalk the bottomless reflective dark.</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="2" data-phase="5">
+        <div class="phase-overlay float-bottom">
+          <span class="phase-label cyan-label">05 // 多重召喚 SWARM</span>
+          <h3 class="phase-title">Infinite Clone Swarm</h3>
+          <p class="phase-quote">「不完全でもいい、殺し切る！」</p>
+        </div>
+      </section>
+
+      <!-- ================= CHAPTER 04: AUTHENTIC MUTUAL LOVE — YUTA OKKOTSU ================= -->
+      <section class="story-phase chapter-gate" data-chapter="3" data-phase="0">
+        <div class="phase-overlay hero-overlay">
+          <div class="chapter-badge pink-badge">CHAPTER 04 // 純愛誓約</div>
+          <h1 class="hero-kanji pink-glow">領域展開</h1>
+          <h2 class="hero-title pink-text">真贋相愛</h2>
+          <div class="hero-sub">AUTHENTIC MUTUAL LOVE — YUTA OKKOTSU</div>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="3" data-phase="1">
+        <div class="phase-overlay float-left">
+          <span class="phase-label pink-label">01 // 模倣術式展開 COPY</span>
+          <h3 class="phase-title">Vow of the Silver Ring</h3>
+          <p class="phase-quote">「来て、リカ... 全部出し切るよ」</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="3" data-phase="2">
+        <div class="phase-overlay float-right">
+          <span class="phase-label pink-label">02 // 荼吉尼天印 MUDRA</span>
+          <h3 class="phase-title">Dakiniten Seal</h3>
+          <p class="phase-accent pink-accent">SACRED KNOT OF DEVOTION</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="3" data-phase="3">
+        <div class="phase-overlay float-center">
+          <span class="phase-label pink-label">03 // 愛執結界破断 RIFT</span>
+          <h3 class="phase-title">Twilight Battlefield</h3>
+          <p class="phase-quote">「真贋相愛」 (SHINGAN SŌAI)</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="3" data-phase="4">
+        <div class="phase-overlay float-left">
+          <span class="phase-label pink-label">04 // 無数の刀塚 GRAVEYARD</span>
+          <h3 class="phase-title">Hill of Infinite Katanas</h3>
+          <p class="phase-desc">Every blade holds an copied technique, randomized until grasped.</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="3" data-phase="5">
+        <div class="phase-overlay float-bottom">
+          <span class="phase-label pink-label">05 // 邪去侮の梯子 SURE-HIT</span>
+          <h3 class="phase-title">Jacob's Ladder</h3>
+          <p class="phase-quote">「邪去侮の梯子 出力最大！」</p>
+        </div>
+      </section>
+
+      <!-- ================= CHAPTER 05: IDLE DEATH GAMBLE — KINJI HAKARI ================= -->
+      <section class="story-phase chapter-gate" data-chapter="4" data-phase="0">
+        <div class="phase-overlay hero-overlay">
+          <div class="chapter-badge green-badge">CHAPTER 05 // 豪運博徒</div>
+          <h1 class="hero-kanji green-glow">領域展開</h1>
+          <h2 class="hero-title green-text">坐殺博徒</h2>
+          <div class="hero-sub">IDLE DEATH GAMBLE — KINJI HAKARI</div>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="4" data-phase="1">
+        <div class="phase-overlay float-left">
+          <span class="phase-label green-label">01 // 熱の胎動 FEVER</span>
+          <h3 class="phase-title">Igniting the Fever</h3>
+          <p class="phase-quote">「賭けようぜ... 俺の『熱』に！」</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="4" data-phase="2">
+        <div class="phase-overlay float-right">
+          <span class="phase-label green-label">02 // 弁財天印 MUDRA</span>
+          <h3 class="phase-title">Benzaiten Seal</h3>
+          <p class="phase-accent green-accent">GODDESS OF FORTUNE • HIGH-STAKES LUCK</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="4" data-phase="3">
+        <div class="phase-overlay float-center">
+          <span class="phase-label green-label">03 // 改札閉鎖 SHUTTER</span>
+          <h3 class="phase-title">Transit Gates Slam</h3>
+          <p class="phase-quote">「坐殺博徒！」 (ZASATSU BAKUTO!)</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="4" data-phase="4">
+        <div class="phase-overlay float-left">
+          <span class="phase-label green-label">04 // 終電舞台 STAGE</span>
+          <h3 class="phase-title">Neon Station Arena</h3>
+          <p class="phase-desc">Private Pure Love Train scenario spinning with infinite slot reels.</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="4" data-phase="5">
+        <div class="phase-overlay float-bottom">
+          <span class="phase-label green-label">05 // 大当たり 777 JACKPOT</span>
+          <h3 class="phase-title">4m 11s Immortality</h3>
+          <p class="phase-quote">「音楽が鳴り続く4分11秒間、秤金次は無敵となる！」</p>
+        </div>
+      </section>
+
+      <!-- ================= CHAPTER 06: SELF-EMBODIMENT OF PERFECTION — MAHITO ================= -->
+      <section class="story-phase chapter-gate" data-chapter="5" data-phase="0">
+        <div class="phase-overlay hero-overlay">
+          <div class="chapter-badge purple-badge">CHAPTER 06 // 特級呪霊</div>
+          <h1 class="hero-kanji purple-glow">領域展開</h1>
+          <h2 class="hero-title purple-text">自閉円頓裹</h2>
+          <div class="hero-sub">SELF-EMBODIMENT OF PERFECTION — MAHITO</div>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="5" data-phase="1">
+        <div class="phase-overlay float-left">
+          <span class="phase-label purple-label">01 // 魂の輪郭 SOUL</span>
+          <h3 class="phase-title">Perceiving the Soul</h3>
+          <p class="phase-quote">「魂の形が見える... 感謝するよ！」</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="5" data-phase="2">
+        <div class="phase-overlay float-right">
+          <span class="phase-label purple-label">02 // 口内四手印 MUDRA</span>
+          <h3 class="phase-title">Oral Four-Hand Mudra</h3>
+          <p class="phase-accent purple-accent">HANDS SPROUTING WITHIN THE MOUTH</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="5" data-phase="3">
+        <div class="phase-overlay float-center">
+          <span class="phase-label purple-label">03 // 縫合線破断 SUTURE</span>
+          <h3 class="phase-title">Stitched Reality Tears</h3>
+          <p class="phase-quote">「自閉円頓裹！」 (JIHEI ENDONKA!)</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="5" data-phase="4">
+        <div class="phase-overlay float-left">
+          <span class="phase-label purple-label">04 // 掌の大聖堂 CATHEDRAL</span>
+          <h3 class="phase-title">Cathedral of Giant Hands</h3>
+          <p class="phase-desc">Colossal interlocking hands forming a dark labyrinth around the soul.</p>
+        </div>
+      </section>
+
+      <section class="story-phase" data-chapter="5" data-phase="5">
+        <div class="phase-overlay float-bottom">
+          <span class="phase-label purple-label">05 // 必中掌底 SURE-HIT</span>
+          <h3 class="phase-title">Idle Transfiguration</h3>
+          <p class="phase-quote">「もう触れられているんだよ、君の魂に」</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- World Minimap: the whole mural, current viewport, click a plate to travel -->
+    <canvas id="minimap" class="minimap" width="300" height="169" title="World map — click a plate to travel there"></canvas>
+
+    <!-- Minimal Bottom Progress Bar & HUD -->
+    <footer class="bottom-bar">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="bottom-info">
+        <span class="bottom-chip" id="hud-chapter-chip">01 / 06 // VOID</span>
+        <span class="bottom-phase" id="hud-phase-chip">00. 六眼開眼 (AWAKEN)</span>
+        <span class="bottom-ce" id="hud-ce-chip">120,000 CE</span>
+      </div>
+    </footer>
+
+    <!-- Engineering HUD (Toggle with Key: H) -->
+    <aside class="dev-hud" id="dev-hud">
+      <div class="dev-hud-header">
+        <div>
+          <span class="dev-badge">ENGINEERING // PIPELINE HUD</span>
+          <h4>Continuous 2.5D Depth-Tunnel</h4>
+        </div>
+        <button id="btn-close-dev" class="close-btn" title="Close HUD">&times;</button>
+      </div>
+
+      <div class="dev-metrics-grid">
+        <div class="dev-metric-box">
+          <span class="dm-label">FPS / FRAME TIME</span>
+          <strong class="dm-val" id="hud-fps">60 FPS (16.6ms)</strong>
+        </div>
+        <div class="dev-metric-box">
+          <span class="dm-label">ACTIVE TRANSITION</span>
+          <strong class="dm-val" id="hud-stage">CH 01 → 02</strong>
+        </div>
+        <div class="dev-metric-box">
+          <span class="dm-label">CAMERA Z-DEPTH</span>
+          <strong class="dm-val" id="hud-camera-z">Z: 0.0m</strong>
+        </div>
+        <div class="dev-metric-box">
+          <span class="dm-label">SCROLL VELOCITY</span>
+          <strong class="dm-val" id="hud-velocity">0.000 Δ/f</strong>
+        </div>
+      </div>
+
+      <div class="dev-view-switch" role="group" aria-label="Camera mode (Key: V)">
+        <button class="view-btn" data-view-mode="world-map">WORLD MAP</button>
+        <button class="view-btn" data-view-mode="world-3d">3D REALMS</button>
+        <button class="view-btn" data-view-mode="portal-tunnel">PORTAL TUNNEL</button>
+      </div>
+
+      <canvas id="fps-sparkline" width="280" height="46" class="fps-sparkline"></canvas>
+    </aside>
+
+    <!-- Black Flash Full Screen Overlay -->
+    <div id="black-flash-fx" class="black-flash-screen"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
