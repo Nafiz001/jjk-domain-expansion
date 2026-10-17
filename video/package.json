@@ -1,0 +1,26 @@
+{
+  "name": "jjk-domain-expansion-video",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Remotion trailer and demo videos for the Ry\u014diki Tenkai scroll experience",
+  "scripts": {
+    "sync-assets": "node -e \"require('fs').cpSync('../public/assets','public/assets',{recursive:true})\"",
+    "studio": "npm run sync-assets && remotion studio src/index.ts",
+    "render:trailer": "npm run sync-assets && remotion render src/index.ts Trailer-16x9 out/trailer-16x9.mp4 && remotion render src/index.ts Trailer-9x16 out/trailer-9x16.mp4",
+    "render:demo": "npm run sync-assets && remotion render src/index.ts Demo-16x9 out/demo-16x9.mp4 && remotion render src/index.ts Demo-9x16 out/demo-9x16.mp4",
+    "render:all": "npm run render:trailer && npm run render:demo && npm run finalize",
+    "finalize": "bash finalize.sh"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.536",
+    "@remotion/google-fonts": "^4.0.536",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.536"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}
