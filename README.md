@@ -1,6 +1,10 @@
 # 領域展開 // RYŌIKI TENKAI v2.0 — 2.5D Multi-Frame Depth-Tunnel & Interactive Clash Engine
 
+![領域展開 — Ryōiki Tenkai](docs/media/banner.jpg)
+
 An interactive frontend engineering showcase inspired by **Jujutsu Kaisen's Domain Expansions (領域展開)**. Built with **TypeScript**, **HTML5 2D/2.5D Canvas**, **Web Audio API**, and a custom **6-Keyframe Portal Depth-Tunnel Rendering Pipeline**.
+
+![Trailer excerpt: the veil breaks, 領域展開, the first domain and its 3D realm](docs/media/trailer.gif)
 
 ---
 
@@ -15,6 +19,8 @@ Instead of panning a single static image, each of the **6 Domain Expansions** is
 - **Frame 04 (`展開 INNATE LANDSCAPE`)**: Emerging through the portal into the vast architectural expanse of the Innate Domain.
 - **Frame 05 (`必中 SURE-KILL CORE`)**: Relativistic zoom into the lethal core of the guaranteed-hit rule.
 
+![Portal tunnel: the next plate opens through a fractured portal](docs/media/portal-tunnel.jpg)
+
 **How the Transition Works:**
 - **3-Plane Depth Stack**: At any scroll position `progress ∈ [0, 1]`, the renderer composites Outgoing `Frame[k]` zooming past the camera (`1.0x → 2.35x`), Incoming `Frame[k+1]` emerging through a feathered radial portal centered at `(focalX, focalY)` (`0.42x → 1.0x`), and Lookahead `Frame[k+2]` at the deep vanishing point.
 - **Peripheral 2.5D Parallax Ring**: An outer ring of `Frame[k]` scales faster (`3.1x`) than the inner plane, creating genuine peripheral motion parallax as you travel forward or backward.
@@ -28,6 +34,8 @@ Instead of panning a single static image, each of the **6 Domain Expansions** is
 5. **Idle Death Gamble (`坐殺博徒`)** — Kinji Hakari (*Benzaiten Mudra • 4m 11s 777 Jackpot Immortality*)
 6. **Self-Embodiment of Perfection (`自閉円頓裹`)** — Mahito (*Four-Handed Oral Mudra • Direct Soul Contact*)
 
+![The six domains' awakening plates](docs/media/domains.jpg)
+
 ### 3. Interactive Portfolio Features
 - **⚔️ Domain Clash Tug-of-War Simulator (`src/engine/clash.ts`)**: Live split-screen canvas arena where users pit any two domains against each other, tune Barrier Refinement (`50–100%`), Cursed Energy Output (`50–200%`), Shell Conditions (*Standard Closed*, *Inverted Shell Rule*, *Shinjuku Basketball Compression*, *200m Open Barrier*), and Anti-Domain Counters (*Simple Domain*, *Hollow Wicker Basket*, *Falling Blossom Emotion*).
 - **📿 120% Potential Incantation & Mudra Ritual**: Interactive 4-step chant sequence (`九綱・偏光・烏と声明・表裏の間` etc.) with a harmonic timing ring that unlocks **120% Cursed Energy Overdrive Mode** and triggers an automatic Black Flash.
@@ -36,6 +44,9 @@ Instead of panning a single static image, each of the **6 Domain Expansions** is
 
 ### 4. World Map Camera (`src/engine/worldMap.ts`, default mode)
 All 36 plates form **one giant mural on a 6×6 grid** (`src/data/world-path.json`). Scrolling flies the camera along a serpentine route through it — down, right, up, left — so each domain is a 2×3 district and the camera never just zooms forward.
+
+![2D world map: gliding across the Malevolent Shrine district](docs/media/world-map.jpg)
+
 - **Dwell & glide**: the camera rests on each plate (for the text), then glides to the next, pulling back mid-flight to reveal the surrounding world (further when crossing into a new domain).
 - **2.5D depth**: plates sit at slightly different depths, so neighbours drift apart as the camera moves; the camera banks into lateral moves, pitches on vertical ones, and follows the mouse. A blurred backdrop layer and directional motion streaks add parallax.
 - **Seamless mural**: every plate is drawn twice over the same over-sized rect — opaque, then feathered with a ramp spanning exactly the overlap zone — so neighbouring ramps are complementary and no hard edge survives. Baked-in letterbox bars in generated frames are detected and trimmed at load time.
@@ -46,6 +57,8 @@ All 36 plates form **one giant mural on a 6×6 grid** (`src/data/world-path.json
 
 ### 5. Domain Realms — three.js 3D World (`src/engine/world3d/`)
 The third camera mode is a **built world**: each innate domain is a procedurally generated 3D realm, and scrolling flies one continuous camera path through all six — six story stations per realm — then across a misty abyss and through a **barrier membrane** into the next, while fog, sky gradient and lighting blend between realm palettes.
+
+![3D realms: the Infinite Void black hole and the Malevolent Shrine pagoda](docs/media/domain-realms.jpg)
 
 | Realm | What you fly through |
 | --- | --- |
