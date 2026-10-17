@@ -2,6 +2,8 @@
 
 ![領域展開 — Ryōiki Tenkai](docs/media/banner.jpg)
 
+**▶ Live demo: [jjk-domain-expansion.vercel.app](https://jjk-domain-expansion.vercel.app)**
+
 An interactive frontend engineering showcase inspired by **Jujutsu Kaisen's Domain Expansions (領域展開)**. Built with **TypeScript**, **HTML5 2D/2.5D Canvas**, **Web Audio API**, and a custom **6-Keyframe Portal Depth-Tunnel Rendering Pipeline**.
 
 ![Trailer excerpt: the veil breaks, 領域展開, the first domain and its 3D realm](docs/media/trailer.gif)
